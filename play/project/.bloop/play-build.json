@@ -2,13 +2,13 @@
     "version" : "1.1.2",
     "project" : {
         "name" : "play-build",
-        "directory" : "/Users/marcy/workspace/play/project",
+        "directory" : "/Users/marcy/workspace/Match/play/project",
         "sources" : [
-            "/Users/marcy/workspace/play/project/src/main/scala-2.12",
-            "/Users/marcy/workspace/play/project/src/main/scala",
-            "/Users/marcy/workspace/play/project/src/main/java",
-            "/Users/marcy/workspace/play/project/src/main/scala-sbt-1.0",
-            "/Users/marcy/workspace/play/project/target/scala-2.12/sbt-1.0/src_managed/main"
+            "/Users/marcy/workspace/Match/play/project/src/main/scala-2.12",
+            "/Users/marcy/workspace/Match/play/project/src/main/scala",
+            "/Users/marcy/workspace/Match/play/project/src/main/java",
+            "/Users/marcy/workspace/Match/play/project/src/main/scala-sbt-1.0",
+            "/Users/marcy/workspace/Match/play/project/target/scala-2.12/sbt-1.0/src_managed/main"
         ],
         "dependencies" : [
         ],
@@ -218,11 +218,11 @@
             "/Users/marcy/.ivy2/cache/org.scala-sbt.ivy/ivy/jars/ivy-2.3.0-sbt-cb9cc189e9f3af519f9f102e6c5d446488ff6832.jar",
             "/Users/marcy/.ivy2/cache/org.scala-sbt/zinc-compile_2.12/jars/zinc-compile_2.12-1.2.5.jar"
         ],
-        "out" : "/Users/marcy/workspace/play/project/.bloop/play-build",
-        "classesDir" : "/Users/marcy/workspace/play/project/.bloop/play-build/scala-2.12/sbt-1.0/classes",
+        "out" : "/Users/marcy/workspace/Match/play/project/.bloop/play-build",
+        "classesDir" : "/Users/marcy/workspace/Match/play/project/.bloop/play-build/scala-2.12/sbt-1.0/classes",
         "resources" : [
-            "/Users/marcy/workspace/play/project/src/main/resources",
-            "/Users/marcy/workspace/play/project/target/scala-2.12/sbt-1.0/resource_managed/main"
+            "/Users/marcy/workspace/Match/play/project/src/main/resources",
+            "/Users/marcy/workspace/Match/play/project/target/scala-2.12/sbt-1.0/resource_managed/main"
         ],
         "scala" : {
             "organization" : "org.scala-lang",
