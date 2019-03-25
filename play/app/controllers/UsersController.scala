@@ -8,12 +8,12 @@ import play.api.libs.json.Json
 import services.UsersService
 
 /**
- * This controller creates an `Action` to handle HTTP requests to the
- * application's home page.
- */
+  * This controller creates an `Action` to handle HTTP requests to the
+  * application's home page.
+  */
 class UsersController @Inject()(
-  cc: ControllerComponents,
-  usersService: UsersService
+    cc: ControllerComponents,
+    usersService: UsersService
 ) extends AbstractController(cc) {
 
   def list() = Action { implicit request: Request[AnyContent] =>

@@ -7,10 +7,10 @@ class UsersServiceSpec extends FunSpec {
   val service = new UsersService
 
   describe("list") {
-    describe("ユーザが存在するとき") {
-      it("Some('marcy')を返す") {
+    describe("ユーザが存在しないとき") {
+      it("Noneを返す") {
         val actual = service.list()
-        assert(actual == Some("marcy"))
+        assert(actual == None)
       }
     }
   }
