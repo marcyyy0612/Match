@@ -23,17 +23,19 @@ class UsersControllerSpec
   describe("GET") {
     describe("list") {
       describe("ユーザが存在しないとき") {
+        val id = "0"
         it("nullを返す") {
-          when(usersService.list()).thenReturn(None)
-          val futureResult = controller.list().apply(FakeRequest(GET, "/users"))
+          when(usersService.list(id)).thenReturn(None)
+          val futureResult = controller.list(id).apply(FakeRequest(GET, "/users"))
           val result = contentAsJson(futureResult)
           assert(result == Json.obj("users" -> JsNull))
         }
       }
       describe("ユーザが存在するとき") {
+        val id = "1"
         it("marcyを返す") {
-          when(usersService.list()).thenReturn(Some("marcy"))
-          val futureResult = controller.list().apply(FakeRequest(GET, "/users"))
+          when(usersService.list(id)).thenReturn(Some("marcy"))
+          val futureResult = controller.list(id).apply(FakeRequest(GET, "/users"))
           val result = contentAsJson(futureResult)
           assert(result == Json.obj("users" -> "marcy"))
         }

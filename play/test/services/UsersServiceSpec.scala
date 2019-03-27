@@ -9,8 +9,16 @@ class UsersServiceSpec extends FunSpec {
   describe("list") {
     describe("ユーザが存在しないとき") {
       it("Noneを返す") {
-        val actual = service.list()
+        val id = "0"
+        val actual = service.list(id)
         assert(actual == None)
+      }
+    }
+    describe("ユーザが存在するとき") {
+      it("marcyを返す") {
+        val id = "1"
+        val actual = service.list(id)
+        assert(actual == Some("marcy"))
       }
     }
   }

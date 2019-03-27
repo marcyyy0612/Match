@@ -1,7 +1,11 @@
 package services
 
 class UsersService {
-  def list(): Option[String] = {
-    Some("marcy")
+  def list(id: String): Option[String] = {
+    if (id == "1") {
+      Some("marcy")
+    } else {
+      None
+    }
   }
 }
