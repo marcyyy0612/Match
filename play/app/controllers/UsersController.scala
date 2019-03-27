@@ -16,7 +16,7 @@ class UsersController @Inject()(
     usersService: UsersService
 ) extends AbstractController(cc) {
 
-  def list(id: String) = Action { implicit request: Request[AnyContent] =>
+  def list(id: Long) = Action { implicit request: Request[AnyContent] =>
     val result = usersService.list(id)
     Ok(Json.obj("users" -> result))
   }

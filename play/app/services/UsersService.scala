@@ -1,11 +1,14 @@
 package services
 
+import models.User
+
 class UsersService {
-  def list(id: String): Option[String] = {
-    if (id == "1") {
-      Some("marcy")
+  def list(id: Long): Seq[User] = {
+    if (id == 1L) {
+      val user: User = User(id = id, name = "marcy")
+      Seq(user)
     } else {
-      None
+      Nil
     }
   }
 }

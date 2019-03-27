@@ -2,23 +2,24 @@ package services
 
 import javax.inject._
 import org.scalatest.FunSpec
+import models.User
 
 class UsersServiceSpec extends FunSpec {
   val service = new UsersService
 
   describe("list") {
     describe("ユーザが存在しないとき") {
-      it("Noneを返す") {
-        val id = "0"
+      it("Nilを返す") {
+        val id = 0L
         val actual = service.list(id)
-        assert(actual == None)
+        assert(actual == Nil)
       }
     }
     describe("ユーザが存在するとき") {
-      it("marcyを返す") {
-        val id = "1"
+      it("Seq(User(1L, marcy))を返す") {
+        val id = 1L
         val actual = service.list(id)
-        assert(actual == Some("marcy"))
+        assert(actual == Seq(User(id, "marcy")))
       }
     }
   }
