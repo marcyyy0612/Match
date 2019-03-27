@@ -2,6 +2,6 @@ package services
 
 class UsersService {
   def list(): Option[String] = {
-    None
+    Some("marcy")
   }
 }

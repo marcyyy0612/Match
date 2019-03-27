@@ -30,6 +30,14 @@ class UsersControllerSpec
           assert(result == Json.obj("users" -> JsNull))
         }
       }
+      describe("ユーザが存在するとき") {
+        it("marcyを返す") {
+          when(usersService.list()).thenReturn(Some("marcy"))
+          val futureResult = controller.list().apply(FakeRequest(GET, "/users"))
+          val result = contentAsJson(futureResult)
+          assert(result == Json.obj("users" -> "marcy"))
+        }
+      }
     }
   }
 }
