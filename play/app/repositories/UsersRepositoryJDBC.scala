@@ -2,8 +2,10 @@ package repositories
 
 import javax.inject.Inject
 import models.User
+import models.Tables._
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import slick.driver.JdbcProfile
+import slick.driver.H2Driver.api._
 
 import scala.concurrent.ExecutionContext
 
@@ -12,8 +14,10 @@ class UsersRepositoryJDBC @Inject()(
     implicit executionContext: ExecutionContext)
     extends HasDatabaseConfigProvider[JdbcProfile] {
 
-  def list: Seq[User] = {
-    val user: User = User(id = 1L, name = "marcy")
-    Seq(user)
+  def list = {
+    val result = Users.result.map(_.map(user => {
+      User(user.id, user.name)
+    }))
+    db.run(result)
   }
 }

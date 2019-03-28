@@ -1,5 +1,6 @@
-CREATE TABLE users (
-  id bigint NOT NULL AUTO_INCREMENT,
-  name varchar(255) NOT NULL,
-  PRIMARY KEY (id)
+CREATE TABLE USERS (
+  ID integer NOT NULL,
+  NAME varchar(255) NOT NULL
 );
+
+-- INSERT INTO USERS (ID, NAME) VALUES (1, 'marcy');
