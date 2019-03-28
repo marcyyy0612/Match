@@ -1,14 +1,13 @@
 package services
 
+import javax.inject._
 import models.User
+import repositories.UsersRepositoryJDBC
 
-class UsersService {
-  def list(id: Long): Seq[User] = {
-    if (id == 1L) {
-      val user: User = User(id = id, name = "marcy")
-      Seq(user)
-    } else {
-      Nil
-    }
+class UsersService @Inject()(
+    usersRepositoryJDBC: UsersRepositoryJDBC
+) {
+  def list: Seq[User] = {
+    usersRepositoryJDBC.list
   }
 }

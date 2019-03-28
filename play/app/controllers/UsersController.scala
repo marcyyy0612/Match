@@ -1,10 +1,8 @@
 package controllers
 
 import javax.inject._
-import play.api._
-import play.api.mvc._
 import play.api.libs.json.Json
-
+import play.api.mvc._
 import services.UsersService
 
 /**
@@ -16,8 +14,8 @@ class UsersController @Inject()(
     usersService: UsersService
 ) extends AbstractController(cc) {
 
-  def list(id: Long) = Action { implicit request: Request[AnyContent] =>
-    val result = usersService.list(id)
+  def list = Action { implicit request: Request[AnyContent] =>
+    val result = usersService.list
     Ok(Json.obj("users" -> result))
   }
 }

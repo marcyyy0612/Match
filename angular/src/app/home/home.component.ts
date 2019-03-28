@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   }
 
   public getUsers(): void {
-    const url = 'http://localhost:9000/users/1';
+    const url = 'http://localhost:9000/users';
     this.http.get(url).subscribe(res => {
       console.log(res);
     });

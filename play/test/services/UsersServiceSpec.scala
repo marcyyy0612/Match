@@ -1,25 +1,33 @@
 package services
 
-import javax.inject._
-import org.scalatest.FunSpec
 import models.User
+import org.mockito.Mockito._
+import org.scalatest.FunSpec
+import org.scalatest.mockito.MockitoSugar
+import org.scalatestplus.play.guice.GuiceOneAppPerTest
+import repositories.UsersRepositoryJDBC
 
-class UsersServiceSpec extends FunSpec {
-  val service = new UsersService
+class UsersServiceSpec
+    extends FunSpec
+    with MockitoSugar
+    with GuiceOneAppPerTest {
+  val repository = mock[UsersRepositoryJDBC]
+  val service = new UsersService(repository)
 
   describe("list") {
     describe("ユーザが存在しないとき") {
       it("Nilを返す") {
-        val id = 0L
-        val actual = service.list(id)
+        when(repository.list).thenReturn(Nil)
+        val actual = service.list
         assert(actual == Nil)
       }
     }
     describe("ユーザが存在するとき") {
       it("Seq(User(1L, marcy))を返す") {
-        val id = 1L
-        val actual = service.list(id)
-        assert(actual == Seq(User(id, "marcy")))
+        val users = Seq(User(1L, "marcy"))
+        when(repository.list).thenReturn(users)
+        val actual = service.list
+        assert(actual == users)
       }
     }
   }
