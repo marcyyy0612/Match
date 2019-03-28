@@ -19,7 +19,5 @@ class UsersController @Inject()(
   def list = Action.async { implicit request: Request[AnyContent] =>
     val result = usersService.list
     result.map(r => Ok(Json.obj("users" -> r)))
-    // result.map(_.map(println))
-    // Ok(Json.obj("users" -> "hoge"))
   }
 }
