@@ -10,7 +10,9 @@ import play.api.test.Helpers._
 import play.api.test._
 import services.UsersService
 
-class UsersControllerSpec
+import scala.concurrent.ExecutionContext
+
+class UsersControllerSpec(implicit ExecutionContext: ExecutionContext)
     extends FunSpec
     with MockitoSugar
     with GuiceOneAppPerTest {
