@@ -1,11 +1,9 @@
 package controllers
 
 import javax.inject._
-import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import play.api.libs.json.Json
 import play.api.mvc._
 import services.UsersService
-import slick.jdbc.JdbcProfile
 
 import scala.concurrent.ExecutionContext
 
@@ -14,17 +12,15 @@ import scala.concurrent.ExecutionContext
   * application's home page.
   */
 class UsersController @Inject()(
-    protected val dbConfigProvider: DatabaseConfigProvider,
     cc: ControllerComponents,
     usersService: UsersService)(implicit executionContext: ExecutionContext)
-    extends AbstractController(cc)
-    with HasDatabaseConfigProvider[JdbcProfile] {
+    extends AbstractController(cc) {
 
   def list = Action.async { implicit request: Request[AnyContent] =>
-    val result = db.run(usersService.list)
-    result.map {
-      case Right(r) => Ok(Json.obj("user" -> r))
-      case Left(l)  => NotFound(Json.obj("user" -> l))
-    }
+    val result = usersService.list
+    // result.map {
+    //   case Right(r) => Ok(Json.obj("user" -> r))
+    //   case Left(l)  => NotFound(Json.obj("user" -> l))
+    // }
   }
 }
