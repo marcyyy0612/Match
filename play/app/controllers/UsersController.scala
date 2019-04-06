@@ -1,7 +1,7 @@
 package controllers
 
+import common.EitherTResultHelper
 import javax.inject._
-import play.api.libs.json.Json
 import play.api.mvc._
 import services.UsersService
 
@@ -12,15 +12,13 @@ import scala.concurrent.ExecutionContext
   * application's home page.
   */
 class UsersController @Inject()(
-    cc: ControllerComponents,
-    usersService: UsersService)(implicit executionContext: ExecutionContext)
-    extends AbstractController(cc) {
+  cc: ControllerComponents,
+  usersService: UsersService)(implicit executionContext: ExecutionContext)
+  extends AbstractController(cc)
+  with EitherTResultHelper {
 
-  def list = Action.async { implicit request: Request[AnyContent] =>
+  def list: Action[AnyContent] = Action.async { implicit request: Request[AnyContent] =>
     val result = usersService.list
-    // result.map {
-    //   case Right(r) => Ok(Json.obj("user" -> r))
-    //   case Left(l)  => NotFound(Json.obj("user" -> l))
-    // }
+    result.toResult
   }
 }

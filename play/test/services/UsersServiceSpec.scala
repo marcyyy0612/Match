@@ -1,35 +1,42 @@
 package services
 
-import models.User
+import models.{Errors, User}
 import org.mockito.Mockito._
 import org.scalatest.FunSpec
 import org.scalatest.mockito.MockitoSugar
 import org.scalatestplus.play.guice.GuiceOneAppPerTest
 import repositories.UsersRepositoryJDBC
 
-import scala.concurrent.ExecutionContext
+import scala.concurrent.duration.Duration
+import scala.concurrent.{Await, ExecutionContext, Future}
 
 class UsersServiceSpec(implicit executionContext: ExecutionContext)
-    extends FunSpec
+  extends FunSpec
     with MockitoSugar
     with GuiceOneAppPerTest {
-  val repository = mock[UsersRepositoryJDBC]
+  val repository: UsersRepositoryJDBC = mock[UsersRepositoryJDBC]
   val service = new UsersService(repository)
 
   describe("list") {
     describe("ユーザが存在しないとき") {
-      it("Nilを返す") {
-        when(repository.list).thenReturn()
+      it("Errors.notFoundを返す") {
+        when(repository.list).thenReturn(
+          Future.successful(Nil)
+        )
         val actual = service.list
-        assert(actual == Left("not found"))
+        val result = Await.result(actual.run, Duration.Zero)
+        assert(result == Errors.notFound())
       }
     }
     describe("ユーザが存在するとき") {
       it("Seq(User(1L, marcy))を返す") {
         val users = Seq(User(1L, "marcy"))
-        when(repository.list).thenReturn()
+        when(repository.list).thenReturn(
+          Future.successful(users)
+        )
         val actual = service.list
-        assert(actual == users)
+        val result = Await.result(actual.run, Duration.Zero)
+        assert(result == users)
       }
     }
   }

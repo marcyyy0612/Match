@@ -1,8 +1,9 @@
-package services
+package common
 
-import scala.concurrent.{ Future, ExecutionContext }
-import scalaz.{ \/-, EitherT, Applicative, \/ }
-import scalaz.syntax.either._
+import models.Errors
+import scalaz.{Applicative, EitherT, \/, \/-}
+
+import scala.concurrent.Future
 
 trait EitherTHelper {
 
@@ -12,8 +13,8 @@ trait EitherTHelper {
       *
       * Fには、Future/DBIO を想定する
       */
-    def toEitherT[F[_]](implicit F: Applicative[F]): EitherT[F, String, A] = {
-      val either: \/[String, A] = \/-(a)
+    def toEitherT[F[_]](implicit F: Applicative[F]): EitherT[F, Errors, A] = {
+      val either: \/[Errors, A] = \/-(a)
       EitherT(F.point(either))
     }
   }
