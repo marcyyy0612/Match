@@ -8,7 +8,8 @@ import scalaz.{-\/, EitherT, \/-}
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class UsersService @Inject()(usersRepositoryJDBC: UsersRepositoryJDBC)(
+class UsersService @Inject()(
+  usersRepositoryJDBC: UsersRepositoryJDBC)(
   implicit executionContext: ExecutionContext)
   extends EitherTHelper {
   def list: EitherT[Future, Errors, Seq[User]] = {

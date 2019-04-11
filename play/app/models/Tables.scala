@@ -20,23 +20,29 @@ trait Tables {
 
   /** Entity class storing rows of table Users
    *  @param id Database column ID SqlType(INTEGER)
-   *  @param name Database column NAME SqlType(VARCHAR) */
-  case class UsersRow(id: Int, name: String)
+   *  @param name Database column NAME SqlType(VARCHAR)
+   *  @param email Database column EMAIL SqlType(VARCHAR)
+   *  @param password Database column PASSWORD SqlType(VARCHAR) */
+  case class UsersRow(id: Int, name: String, email: String, password: String)
   /** GetResult implicit for fetching UsersRow objects using plain SQL queries */
   implicit def GetResultUsersRow(implicit e0: GR[Int], e1: GR[String]): GR[UsersRow] = GR{
     prs => import prs._
-    UsersRow.tupled((<<[Int], <<[String]))
+    UsersRow.tupled((<<[Int], <<[String], <<[String], <<[String]))
   }
   /** Table description of table USERS. Objects of this class serve as prototypes for rows in queries. */
   class Users(_tableTag: Tag) extends Table[UsersRow](_tableTag, "USERS") {
-    def * = (id, name) <> (UsersRow.tupled, UsersRow.unapply)
+    def * = (id, name, email, password) <> (UsersRow.tupled, UsersRow.unapply)
     /** Maps whole row to an option. Useful for outer joins. */
-    def ? = (Rep.Some(id), Rep.Some(name)).shaped.<>({r=>import r._; _1.map(_=> UsersRow.tupled((_1.get, _2.get)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
+    def ? = (Rep.Some(id), Rep.Some(name), Rep.Some(email), Rep.Some(password)).shaped.<>({r=>import r._; _1.map(_=> UsersRow.tupled((_1.get, _2.get, _3.get, _4.get)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
 
     /** Database column ID SqlType(INTEGER) */
     val id: Rep[Int] = column[Int]("ID")
     /** Database column NAME SqlType(VARCHAR) */
     val name: Rep[String] = column[String]("NAME")
+    /** Database column EMAIL SqlType(VARCHAR) */
+    val email: Rep[String] = column[String]("EMAIL")
+    /** Database column PASSWORD SqlType(VARCHAR) */
+    val password: Rep[String] = column[String]("PASSWORD")
   }
   /** Collection-like TableQuery object for table Users */
   lazy val Users = new TableQuery(tag => new Users(tag))

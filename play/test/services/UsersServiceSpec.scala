@@ -5,7 +5,7 @@ import org.mockito.Mockito._
 import org.scalatest.FunSpec
 import org.scalatest.mockito.MockitoSugar
 import org.scalatestplus.play.guice.GuiceOneAppPerTest
-import repositories.UsersRepositoryJDBC
+import repositories.AuthRepositoryJDBC
 
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, ExecutionContext, Future}
@@ -14,7 +14,7 @@ class UsersServiceSpec(implicit executionContext: ExecutionContext)
   extends FunSpec
     with MockitoSugar
     with GuiceOneAppPerTest {
-  val repository: UsersRepositoryJDBC = mock[UsersRepositoryJDBC]
+  val repository: AuthRepositoryJDBC = mock[AuthRepositoryJDBC]
   val service = new UsersService(repository)
 
   describe("list") {

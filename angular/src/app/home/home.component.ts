@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { stringify } from '@angular/core/src/render3/util';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.getUsers();
+    this.signin();
   }
 
   public getUsers(): void {
@@ -22,5 +24,16 @@ export class HomeComponent implements OnInit {
     this.http.get(url).subscribe(res => {
       console.log(res);
     });
+  }
+
+  public signin(): void {
+    const url = 'http://localhost:9000/signin';
+    const body = {
+      email: "marcy@sample.com",
+      password: "password"
+    }
+    this.http.post(url, body).subscribe(res => {
+      console.log(res);
+    })
   }
 }
