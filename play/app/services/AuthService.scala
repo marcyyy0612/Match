@@ -19,6 +19,7 @@ class AuthService @Inject()(authRepositoryJDBC: AuthRepositoryJDBC)(
       .signin(email)
       .map {
         case Some(r) if r == password => \/-(true)
+        case Some(r) if r != password => -\/(Errors.unAuthorized())
         case _ => -\/(Errors.notFound())
       }
       .toEitherT

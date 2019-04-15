@@ -34,4 +34,6 @@ trait Errors {
 object Errors {
   def notFound(): Errors = ResourceNotFound()
   def notFound(msg: String): Errors = ResourceNotFound(Some(msg))
+  def unAuthorized(): Errors = UnAuthorized()
+  def unAuthorized(msg: String): Errors = UnAuthorized(Some(msg))
 }
