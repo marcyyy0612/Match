@@ -12,9 +12,10 @@ class AuthService @Inject()(
   authRepositoryJDBC: AuthRepositoryJDBC)(
   implicit executionContext: ExecutionContext)
   extends EitherTHelper {
+
   def signin(email: String, password: String): EitherT[Future, Errors, Boolean] = {
     authRepositoryJDBC.signin(email).map {
-      case r if r == password => \/-(true)
+      case Some(r) if r == password => \/-(true)
       case _ => -\/(Errors.notFound())
     }.toEitherT
   }

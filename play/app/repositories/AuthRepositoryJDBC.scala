@@ -13,10 +13,13 @@ class AuthRepositoryJDBC @Inject()(
   implicit executionContext: ExecutionContext)
   extends HasDatabaseConfigProvider[JdbcProfile] {
 
-  def signin(email: String): Future[String] = {
-    val result = Users.result.map(_.filter(user => {
-      user.email.equals(email.bind)
-    }).map(_.password))
-    db.run(result.map(_.head))
+  def signin(email: String): Future[Option[String]] = {
+    val result: DBIO[Option[String]] =
+      Users
+        .filter(_.email === email.bind)
+        .map(_.password)
+        .result
+        .map(_.headOption)
+    db.run(result)
   }
 }

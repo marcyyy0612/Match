@@ -1,16 +1,13 @@
 package models
 
-import play.api.libs.json.Reads
+import play.api.libs.json._
+import play.api.libs.json.Reads._
+import play.api.libs.functional.syntax._
 
 object Auth {
   case class Signin(email: String, password: String)
-
   object Signin {
-    implicit val signinReads: Reads[Signin] = {
-      (__ \ "full_name").read[String] ~
-        (__ \ "age").read[Int].map[String](_.toString)
-      )(Signin)
-    }
+    implicit val signinReads: Reads[Signin] = Json.reads[Signin]
   }
 }
 
