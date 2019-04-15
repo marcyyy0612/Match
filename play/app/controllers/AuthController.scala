@@ -10,10 +10,9 @@ import services.AuthService
 import scala.concurrent.ExecutionContext
 
 class AuthController @Inject()(
-  cc: ControllerComponents,
-  authService: AuthService)
-  (implicit executionContext: ExecutionContext)
-  extends AbstractController(cc)
+    cc: ControllerComponents,
+    authService: AuthService)(implicit executionContext: ExecutionContext)
+    extends AbstractController(cc)
     with EitherTResultHelper {
 
   def signIn: Action[JsValue] = Action.async(parse.json) { implicit request =>

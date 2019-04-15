@@ -8,15 +8,19 @@ import scalaz.{-\/, EitherT, \/-}
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class AuthService @Inject()(
-  authRepositoryJDBC: AuthRepositoryJDBC)(
-  implicit executionContext: ExecutionContext)
-  extends EitherTHelper {
+class AuthService @Inject()(authRepositoryJDBC: AuthRepositoryJDBC)(
+    implicit executionContext: ExecutionContext)
+    extends EitherTHelper {
 
-  def signin(email: String, password: String): EitherT[Future, Errors, Boolean] = {
-    authRepositoryJDBC.signin(email).map {
-      case Some(r) if r == password => \/-(true)
-      case _ => -\/(Errors.notFound())
-    }.toEitherT
+  def signin(
+      email: String,
+      password: String): EitherT[Future, Errors, Boolean] = {
+    authRepositoryJDBC
+      .signin(email)
+      .map {
+        case Some(r) if r == password => \/-(true)
+        case _ => -\/(Errors.notFound())
+      }
+      .toEitherT
   }
 }

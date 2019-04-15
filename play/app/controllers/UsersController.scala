@@ -12,14 +12,14 @@ import scala.concurrent.ExecutionContext
   * application's home page.
   */
 class UsersController @Inject()(
-  cc: ControllerComponents,
-  usersService: UsersService)(
-  implicit executionContext: ExecutionContext)
-  extends AbstractController(cc)
+    cc: ControllerComponents,
+    usersService: UsersService)(implicit executionContext: ExecutionContext)
+    extends AbstractController(cc)
     with EitherTResultHelper {
 
-  def list: Action[AnyContent] = Action.async { implicit request: Request[AnyContent] =>
-    val result = usersService.list
-    result.toResult
+  def list: Action[AnyContent] = Action.async {
+    implicit request: Request[AnyContent] =>
+      val result = usersService.list
+      result.toResult
   }
 }
